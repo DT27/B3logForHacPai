@@ -150,7 +150,6 @@ class B3logForHacPai_Plugin implements Typecho_Plugin_Interface
                     "key" => $b3log->b3logKey,
                 ));
             $postString = json_encode($postData);
-            print_r($postString);exit;
             $ch = curl_init('http://rhythm.b3log.org/api/comment');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $postString);
@@ -160,6 +159,7 @@ class B3logForHacPai_Plugin implements Typecho_Plugin_Interface
                     'Content-Length: ' . strlen($postString))
             );
             $result = curl_exec($ch);
+            //print_r($result);exit;
         }
         return $comment;
     }
