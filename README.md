@@ -1,7 +1,9 @@
 # [B3logForHacPai](https://dt27.org/php/b3log-hacpai-typecho/)
 **黑客派社区实时同步插件 For Typecho**
+
 基于[B3log理念][1]，整合 [Typecho][2] 博客与 [黑客派][3] 社区，实现内容及评论互相实时同步。丰富博客与社区内容。
- ## Features&Todo 
+
+## Features&Todo 
 * [x] 博客发布博文 -> 社区发布帖子
 * [x] 博客更新博文 -> 社区更新帖子
 * [ ] 博客发布评论 -> 社区发布回帖
