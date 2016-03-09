@@ -137,8 +137,8 @@ class B3logForHacPai_Plugin implements Typecho_Plugin_Interface
         if ($b3log->isHacPai == 1) {
             $postData = array(
                 "comment" => array(
-                    "id" => $comment->cid,
-                    "articleId" => $comment->coid,
+                    "id" => $comment->coid,
+                    "articleId" => $comment->cid,
                     "content" => $comment->text,
                     "authorName" => $comment->author,
                     "authorEmail" => $comment->mail,
@@ -156,7 +156,7 @@ class B3logForHacPai_Plugin implements Typecho_Plugin_Interface
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                     'Content-Type: application/json',
-                    'Content-Length: ' . strlen($postString))
+                    'Content -Length: ' . strlen($postString))
             );
             $result = curl_exec($ch);
             //print_r($result);exit;
