@@ -6,6 +6,7 @@
 * [x] 博客更新博文 -> 社区更新帖子
 * [ ] 博客发布评论 -> 社区发布回帖
 * [ ] 社区发布回帖 -> 博客发布评论
+
 ###### Plugin License
 > Copyright © 2016 [DT27](https://dt27.org)  
 > License: [GNU General Public License v3.0](http://www.gnu.org/licenses/gpl-3.0.html)
