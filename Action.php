@@ -23,7 +23,7 @@ class B3logForHacPai_Action extends Typecho_Widget
      */
     public function articleReceiver(){
 
-        print_r($_POST);
+        //print_r($_POST);
     }
 
     /**
@@ -31,7 +31,36 @@ class B3logForHacPai_Action extends Typecho_Widget
      *
      */
     public function commentReceiver(){
-        echo 'comment';
+        if (!isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
+            $GLOBALS['HTTP_RAW_POST_DATA'] = file_get_contents("php://input");
+        }
+        if (isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
+            $GLOBALS['HTTP_RAW_POST_DATA'] = trim($GLOBALS['HTTP_RAW_POST_DATA']);
+        }
+
+        $result = json_decode(strtolower($GLOBALS['HTTP_RAW_POST_DATA']));
+        if($result->client->key == strtolower(Typecho_Widget::widget('Widget_Options')->plugin('B3logForHacPai')->b3logKey)) {
+            $post = Typecho_Db::get()->fetchRow(Typecho_Db::get()->select('authorId')->from('table.contents')->where('cid = ?', $result->comment->articleid));
+
+            if ($post) {
+                $comment = array(
+                    'cid' => $result->comment->articleid,
+                    'created' => Helper::options()->gmtTime,
+                    'text' => $result->comment->content,
+                    'author' => $result->comment->authorname,
+                    'mail' => $result->comment->authoremail,
+                    'url' => $result->comment->authorurl,
+                    'agent' => $this->request->getAgent(),
+                    'ip' => $this->request->getIp(),
+                    'ownerId' => $post['authorId'],
+                    'type' => 'comment',
+                    'status' => 'approved',
+                );
+                //print_r($result->comment->articleid);
+                //$article = Typecho_Widget::widget('Widget_Users_Author@' . $this->cid, array('cid' => $result->comment->articleId));
+                Typecho_Widget::widget('Widget_Feedback')->insert($comment);
+            }
+        }
     }
 
 
