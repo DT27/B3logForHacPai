@@ -55,7 +55,8 @@ class B3logForHacPai_Plugin implements Typecho_Plugin_Interface
     public static function config(Typecho_Widget_Helper_Form $form)
     {
         $b3logKey = new Typecho_Widget_Helper_Form_Element_Text('b3logKey', NULL, NULL,
-            _t('B3log Key'), _t('请填写黑客派中设置的 B3log Key，<a href="https://hacpai.com/settings#soloKey" target="_blank">点此查看设置</a>'));
+            _t('B3log Key'), _t('请填写黑客派社区中设置的 B3log Key，并在社区中设置接收接口。<a href="https://hacpai.com/settings#soloKey" target="_blank">点此设置</a><br>
+客户端收文及更新接口：<strong style="color: red;">'.Helper::options()->siteUrl.'b3log-hacpai/article</strong><br>客户端收评接口：<strong style="color: red;">'.Helper::options()->siteUrl.'b3log-hacpai/comment</strong>'));
         $form->addInput($b3logKey->addRule('required', _t('必须填写 B3log Key')));
 
         $b3logTitle = new Typecho_Widget_Helper_Form_Element_Text('b3logTitle', NULL, Helper::options()->title,
