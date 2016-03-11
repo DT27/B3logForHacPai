@@ -38,18 +38,18 @@ class B3logForHacPai_Action extends Typecho_Widget
             $GLOBALS['HTTP_RAW_POST_DATA'] = trim($GLOBALS['HTTP_RAW_POST_DATA']);
         }
 
-        $result = json_decode(strtolower($GLOBALS['HTTP_RAW_POST_DATA']));
-        if($result->client->key == strtolower(Typecho_Widget::widget('Widget_Options')->plugin('B3logForHacPai')->b3logKey)) {
-            $post = Typecho_Db::get()->fetchRow(Typecho_Db::get()->select('authorId')->from('table.contents')->where('cid = ?', $result->comment->articleid));
+        $result = json_decode($GLOBALS['HTTP_RAW_POST_DATA']);
+        if($result->client->key == Typecho_Widget::widget('Widget_Options')->plugin('B3logForHacPai')->b3logKey) {
+            $post = Typecho_Db::get()->fetchRow(Typecho_Db::get()->select('authorId')->from('table.contents')->where('cid = ?', $result->comment->articleId));
 
             if ($post) {
                 $comment = array(
-                    'cid' => $result->comment->articleid,
+                    'cid' => $result->comment->articleId,
                     'created' => Helper::options()->gmtTime,
                     'text' => $result->comment->content,
-                    'author' => $result->comment->authorname,
-                    'mail' => $result->comment->authoremail,
-                    'url' => $result->comment->authorurl,
+                    'author' => $result->comment->authorName,
+                    'mail' => $result->comment->authorEmail,
+                    'url' => $result->comment->authorURL,
                     'agent' => $this->request->getAgent(),
                     'ip' => $this->request->getIp(),
                     'ownerId' => $post['authorId'],
